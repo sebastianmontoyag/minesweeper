@@ -1,0 +1,50 @@
+body {
+    background-color: gainsboro;
+}
+
+#main {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    position: relative;
+    background: rgba(94, 94, 94, 0.1);
+    border-radius: 15%;
+}
+
+#table-div  {
+    
+    position: relative;
+    margin: auto;
+    text-align: center;
+    padding: 20px 20px 40px 20px;
+}
+
+table {
+	border: solid;
+    background-color: silver;
+    margin: auto;
+    empty-cells: show;
+}
+
+th {
+    background-color: Grey;
+    
+}
+
+
+ td {
+    padding: 10px;
+    border: 5px solid;
+    border-color: #a7a5a4;
+}
+
+/* hacer en javascript: hide all cells */
+.cell_div {
+    visibility: hidden;
+}
+
+td:hover {
+    background: #a7a5a4;
+}
+
+
