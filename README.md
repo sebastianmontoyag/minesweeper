@@ -1,1 +1,1 @@
-Hi! this is my fisrt project, its a javascript-based minesweeper. i hope you have fun!
+Hi! this is my fisrt project, it's a javascript-based minesweeper. I hope you have fun! Let's bring it on.
