@@ -3,7 +3,7 @@
 	<head>
 		
 		<link rel="stylesheet" href="styles/style.css">
-		<script src="/js/script.js"></script>
+		<script src="./scripts/myscript.js"></script>
 	</head>
 	<body>
 		
@@ -11,28 +11,19 @@
 			
 			<div id="table-div">
 				<p>Let's play a game!</p>
+				<button id="new_game" onclick="createTable()">New Game</button>
 				<table id ="table">
 					<tr>
 						<th id="bombs_left"></th>
 						<th id="smiley"><button id="smile_button">:)</button></th>
 						<th id="timer"></th>
 					</tr>
-					<tr>
-						<td><div class=cell_div>1S</div></td>
-						<td>2</td>
-						<td>3</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-					</tr>
-					<tr>
-						<td>7</td>
-						<td>8</td>
-						<td>9</td>
+					<tr id="field">
+						
 					</tr>
 				</table>
+
+				<ul id="bombs"></ul>
 			</div>
 		</div>
 	</body>

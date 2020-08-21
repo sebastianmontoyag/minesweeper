@@ -7,7 +7,7 @@ let bombSet = [];
 //genera las bombas del juego en un array aleatorio
 //comprobando si existe con cada iteracion
 function bombGenerator(game){
-
+    
     for (let i = 0; i < set; i++){ 
         
         var bomb = Math.floor(Math.random() * game);
@@ -27,45 +27,32 @@ function bombGenerator(game){
 
 // colocar las bombas en sus casillas
 
+//cambiar td por div y css grid
+
 function populateField() {
-    var isBomb;
-    var bombCell, emptyCell;
-    var tableArr = [];
-
-    console.log(bombSet.find(isBomb => isBomb == 0));
-    if (bombSet.find(isBomb => isBomb == 0) == 0){
-        tableArr.push("BOMB");
-    }else 
-    tableArr.push("NOPE");
+    var mineField = "";
     
-
-    //     for(let i = 0; i < game; i++){
-    //     if ( i == bombSet.find(isBomb => isBomb == i)) {
-    //     bombCell = `<li id="${i}">*</li>`;
-    //     tableArr.push(bombCell);
-    //     }else        
-    //     emptyCell = `<li id="${i}"></li>`;
-     
-    //     tableArr.push(emptyCell);
-    // }
+    for (let i = 0; i < game; i++){
     
-   return tableArr;
+    if(i == bombSet.find(isBomb => isBomb == i)){
+        
+        mineField += `<td id=${i}>*</td>`;
+
+        
+    }else   
+        mineField += `<td id=${i}></td>`;
+
 }
+    
+    return mineField;
 
-
+}
 
 function createTable(){
-    bombGenerator(game);
-    theGame = populateField();
-
-    for (let i = 0; i < set; i++){
     
-    }
-    return theGame;
+    bombGenerator(game);
+    var theGame = populateField();
+    var theField = document.getElementById('field').innerHTML = theGame;
+    
+    return theField;
 }
-
-
-console.log(bombGenerator(game));
-
-
-console.log(createTable());
