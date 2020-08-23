@@ -26,6 +26,10 @@ table {
     empty-cells: show;
 }
 
+#table {
+    border-bottom: 0px;
+}
+
 th {
     background-color: Grey;
     

@@ -30,10 +30,11 @@ function bombGenerator(game){
 //cambiar td por div y css grid
 
 function populateField() {
-    var mineField = "";
-    
+    var mineField = "<tr>";
+    var rowBreak = 0;
     for (let i = 0; i < game; i++){
-    
+    if (rowBreak == 8){mineField+="</tr><tr>"; rowBreak=0;}
+    rowBreak ++;
     if(i == bombSet.find(isBomb => isBomb == i)){
         
         mineField += `<td id=${i}>*</td>`;
@@ -41,8 +42,9 @@ function populateField() {
         
     }else   
         mineField += `<td id=${i}></td>`;
-
+    
 }
+    mineField += "</tr>";
     
     return mineField;
 
@@ -56,3 +58,4 @@ function createTable(){
     
     return theField;
 }
+
