@@ -12,17 +12,18 @@
 			<div id="table-div">
 				<p>Let's play a game!</p>
 				<button id="new_game" onclick="createTable()">New Game</button>
-				<table id ="table">
-					<tr>
-						<th id="bombs_left"></th>
-						<th id="smiley"><button id="smile_button">:)</button></th>
-						<th id="timer"></th>
-					</tr>
+				
+					<div class="status-bar">
+						<ul>
+							<li>Bombs left:</li>
+							<li><button id="reset">:D</button></li>
+							<li>timer</li>
+						</ul>
+					
+					</div>
 					<table id="field">
 						
 					</table>
-				</table>
-
 				<ul id="bombs"></ul>
 			</div>
 		</div>

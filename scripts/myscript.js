@@ -27,8 +27,6 @@ function bombGenerator(game){
 
 // colocar las bombas en sus casillas
 
-//cambiar td por div y css grid
-
 function populateField() {
     var mineField = "<tr>";
     var rowBreak = 0;
@@ -59,3 +57,14 @@ function createTable(){
     return theField;
 }
 
+//Necesito un array antes de mostrar la tabla, comprobar numeros y despues 
+//crear el html
+
+// function checkBomb(){
+//     var isBomb;
+    
+//     for (){
+
+//     }
+
+// }

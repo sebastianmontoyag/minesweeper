@@ -1,34 +1,32 @@
 body {
-    background-color: gainsboro;
+    background-color:gainsboro;
 }
 
 #main {
-    width: 80%;
-    height: auto;
-    margin: auto;
+    width: 400px;
+    height: 600px;
+    margin: 0 auto;
     position: relative;
-    background: rgba(94, 94, 94, 0.1);
-    border-radius: 15%;
+    background: rgba(94, 94, 94, 0.71);
+    border-radius: 5%;
+    box-shadow: #272727 4px 4px;
 }
 
 #table-div  {
-    
     position: relative;
-    margin: auto;
+    margin: 0 auto;
     text-align: center;
     padding: 20px 20px 40px 20px;
 }
 
 table {
+    min-width: 80%;
 	border: solid;
     background-color: silver;
     margin: auto;
     empty-cells: show;
 }
 
-#table {
-    border-bottom: 0px;
-}
 
 th {
     background-color: Grey;
@@ -37,9 +35,31 @@ th {
 
 
  td {
-    padding: 10px;
     border: 5px solid;
     border-color: #a7a5a4;
+    width: 15px;
+    height: 15px;
+}
+
+.status-bar {
+    width: 100%;
+    height: auto;
+    padding: 10px 0 10px 0;
+
+}
+
+.status-bar ul{
+    width: 80%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.status-bar li {
+    width: 180px;
+}
+.status-bar button {
+    width: 100%;
 }
 
 /* hacer en javascript: hide all cells */
@@ -48,6 +68,7 @@ th {
 }
 
 td:hover {
+    
     background: #a7a5a4;
 }
 
