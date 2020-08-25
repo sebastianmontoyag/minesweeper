@@ -4,6 +4,17 @@ const game = 64; //Tamaño del campo
 const set = 16; //dificultad
 let bombSet = [];
 
+// boton "NEW GAME"
+function createTable(){
+    reset();
+    bombGenerator(game);
+    var theGame = populateField();
+    var theTable = checkBomb(theGame);
+    var theField = document.getElementById('field').innerHTML = theTable;
+    
+    return theField;
+}
+
 //genera las bombas del juego en un array aleatorio
 //comprobando si existe con cada iteracion
 function bombGenerator(game){
@@ -19,52 +30,68 @@ function bombGenerator(game){
         }else
         bombSet.push(bomb);
 
-    }
-    
+    }    
     return bombSet;
-
 }
 
-// colocar las bombas en sus casillas
+// colocar las bombas en un array con "0" como celda vacia
 
 function populateField() {
-    var mineField = "<tr>";
-    var rowBreak = 0;
+    var mineField = [];
     for (let i = 0; i < game; i++){
-    if (rowBreak == 8){mineField+="</tr><tr>"; rowBreak=0;}
-    rowBreak ++;
-    if(i == bombSet.find(isBomb => isBomb == i)){
-        
-        mineField += `<td id=${i}>*</td>`;
-
-        
+  
+    if(i == bombSet.find(isBomb => isBomb == i)){        
+        mineField.push(i);        
     }else   
-        mineField += `<td id=${i}></td>`;
-    
+        mineField.push("0");
 }
-    mineField += "</tr>";
-    
+    console.log(mineField);
     return mineField;
 
 }
 
-function createTable(){
-    
-    bombGenerator(game);
-    var theGame = populateField();
-    var theField = document.getElementById('field').innerHTML = theGame;
-    
-    return theField;
+
+
+//resetea el juego
+function reset(){
+    var clearField = document.getElementById('field').innerHTML = "";
+    bombSet = [];
+    return clearField;
+
 }
 
-//Necesito un array antes de mostrar la tabla, comprobar numeros y despues 
+
 //crear el html
+//contruye una string con etiquetas html de tabla.
 
-// function checkBomb(){
-//     var isBomb;
+function checkBomb(arr){
+    var bombCount = 0;
+    var mineTable = "<tr>";
+    var rowBreak = 0;
+    for (let i = 0; i < arr.length; i++){
+        bombCount =0;
+        if (rowBreak == 8){mineTable+="</tr><tr>"; rowBreak=0;}
+        
+        if (arr[i] != "0"){
+            mineTable += `<td class="cell" id=${i}>*</td>`;
+        }else if (arr[i] =="0"){
+        if(Number.isInteger(arr[i-9]) == true && rowBreak != 0){bombCount++;}
+        if(Number.isInteger(arr[i-8]) == true){bombCount++}
+        if(Number.isInteger(arr[i-7]) == true && rowBreak != 7){bombCount++;}
+        if(Number.isInteger(arr[i-1]) == true && rowBreak != 0){bombCount++;}
+        if(Number.isInteger(arr[i+1]) == true && rowBreak != 7){bombCount++;}
+        if(Number.isInteger(arr[i+7]) == true && rowBreak != 0){bombCount++;}
+        if(Number.isInteger(arr[i+8]) == true ){bombCount++;}
+        if(Number.isInteger(arr[i+9]) == true && rowBreak != 7){bombCount++;}
+        if(bombCount == 0) {mineTable += `<td class="cell" id=${i}></td>`;}
+        else mineTable += `<td class="cell" id=${i}>${bombCount}</td>`;
+        }
+        
+        rowBreak ++;
+}
+  
+     mineTable += "</tr>";
     
-//     for (){
+    return mineTable;
+}
 
-//     }
-
-// }

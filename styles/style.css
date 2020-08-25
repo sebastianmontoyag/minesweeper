@@ -63,13 +63,12 @@ th {
 }
 
 /* hacer en javascript: hide all cells */
-.cell_div {
-    visibility: hidden;
+.cell{
+    
 }
 
 td:hover {
     
     background: #a7a5a4;
+    
 }
-
-
