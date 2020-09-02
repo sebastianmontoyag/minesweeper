@@ -3,17 +3,29 @@
 const game = 64; //Tamaño del campo
 const set = 16; //dificultad
 let bombSet = [];
+let emptyCell = [];
+let numberCell = [];
+let bombCell = [];
 
 // boton "NEW GAME"
 function createTable(){
     reset();
     bombGenerator(game);
     var theGame = populateField();
-    var theTable = checkBomb(theGame);
-    var theField = document.getElementById('field').innerHTML = theTable;
     
+    var theTable = checkBomb(theGame);
+    console.log(numberCell);
+    console.log(bombCell);
+    console.log(emptyCell);
+    var theField = document.getElementById('field').innerHTML = theTable;
+    for (let i = 0; i < theGame.length; i++){
+    document.getElementsByClassName("innerCell")[i].style.visibility = "hidden";
+    }
     return theField;
 }
+
+
+
 
 //genera las bombas del juego en un array aleatorio
 //comprobando si existe con cada iteracion
@@ -45,7 +57,6 @@ function populateField() {
     }else   
         mineField.push("0");
 }
-    console.log(mineField);
     return mineField;
 
 }
@@ -56,6 +67,9 @@ function populateField() {
 function reset(){
     var clearField = document.getElementById('field').innerHTML = "";
     bombSet = [];
+    emptyCell = [];
+    numberCell = [];
+    bombCell = [];
     return clearField;
 
 }
@@ -73,7 +87,8 @@ function checkBomb(arr){
         if (rowBreak == 8){mineTable+="</tr><tr>"; rowBreak=0;}
         
         if (arr[i] != "0"){
-            mineTable += `<td class="cell" id=${i}>*</td>`;
+            mineTable += `<td onclick="showCell(${i})" class="cell" id=${i}><span class="innerCell">*</span></td>`;
+            bombCell.push(i);
         }else if (arr[i] =="0"){
         if(Number.isInteger(arr[i-9]) == true && rowBreak != 0){bombCount++;}
         if(Number.isInteger(arr[i-8]) == true){bombCount++}
@@ -83,15 +98,38 @@ function checkBomb(arr){
         if(Number.isInteger(arr[i+7]) == true && rowBreak != 0){bombCount++;}
         if(Number.isInteger(arr[i+8]) == true ){bombCount++;}
         if(Number.isInteger(arr[i+9]) == true && rowBreak != 7){bombCount++;}
-        if(bombCount == 0) {mineTable += `<td class="cell" id=${i}></td>`;}
-        else mineTable += `<td class="cell" id=${i}>${bombCount}</td>`;
+        if(bombCount == 0) {
+            mineTable += `<td onclick="showCell(${i})" class="cell" id=${i}><span class="innerCell"></span></td>`;
+            emptyCell.push(i);
+        }
+        else mineTable += `<td onclick="showCell(${i})" class="cell" id=${i}><span class="innerCell">${bombCount}</span></td>`;
+            numberCell.push(i);
         }
         
         rowBreak ++;
 }
   
      mineTable += "</tr>";
-    
     return mineTable;
 }
 
+function showCell(cellId){
+    console.log("clicked" + cellId);
+    console.log(bombSet);
+    if (bombSet.includes(cellId)){
+        checkCells(bombSet, cellId);
+    }
+
+}
+
+function checkCells(arr, n){
+  
+    var innerCell = document.getElementsByClassName("innerCell");
+    if (arr.includes(n)){
+        console.log(innerCell.length);
+        for (let i = 0; i < innerCell.length; i++){
+         innerCell[i].style.visibility = "visible";
+        }
+ 
+    }
+}
