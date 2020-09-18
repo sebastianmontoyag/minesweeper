@@ -1,7 +1,7 @@
 
 
 const game = 64; //Tamaño del campo
-const set = 16; //dificultad
+const set = 8; //dificultad
 let bombSet = [];
 let emptyCell = [];
 let numberCell = [];
