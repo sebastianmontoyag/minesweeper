@@ -116,20 +116,32 @@ function checkBomb(arr){
 function showCell(cellId){
     console.log("clicked" + cellId);
     console.log(bombSet);
-    if (bombSet.includes(cellId)){
-        checkCells(bombSet, cellId);
-    }
+    checkCells(bombSet, cellId);
+    
 
 }
 
 function checkCells(arr, n){
   
     var innerCell = document.getElementsByClassName("innerCell");
+    var cell = document.getElementsByClassName("cell");
+    
     if (arr.includes(n)){
         console.log(innerCell.length);
         for (let i = 0; i < innerCell.length; i++){
-         innerCell[i].style.visibility = "visible";
+         
+             innerCell[i].style.visibility = "visible";
+            
         }
- 
+    }else if (emptyCell.includes(n)){
+        console.log("Empty");
+        for (let j = 0; j < emptyCell.length; j++){
+            innerCell[emptyCell[j]].style.visibility = "visible";
+            cell[emptyCell[j]].style.background = "grey";
+        }
+    }else {
+        innerCell[n].style.visibility = "visible";
     }
+ 
+    
 }
