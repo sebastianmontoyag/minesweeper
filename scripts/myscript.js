@@ -21,6 +21,7 @@ function createTable(){
     for (let i = 0; i < theGame.length; i++){
     document.getElementsByClassName("innerCell")[i].style.visibility = "hidden";
     }
+
     return theField;
 }
 
@@ -135,9 +136,11 @@ function checkCells(arr, n){
         }
     }else if (emptyCell.includes(n)){
         console.log("Empty");
+        
         for (let j = 0; j < emptyCell.length; j++){
             innerCell[emptyCell[j]].style.visibility = "visible";
             cell[emptyCell[j]].style.background = "grey";
+           
         }
     }else {
         innerCell[n].style.visibility = "visible";
