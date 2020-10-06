@@ -1,151 +1,184 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.querySelector('.grid');
+    let width = 10;
+    let bombAmount = 20;
+    let flags = 0;
+    let squares = [];
+    let isGameOver = false;
 
 
-const game = 64; //Tamaño del campo
-const set = 8; //dificultad
-let bombSet = [];
-let emptyCell = [];
-let numberCell = [];
-let bombCell = [];
+    //create board
+    function createBoard() {
+        //create game with random bombs
+        const bombsArray = Array(bombAmount).fill('bomb');
+        const emptyArray = Array(width*width - bombAmount).fill('valid'); 
+        const gameArray = emptyArray.concat(bombsArray);
+        const shuffledArray = gameArray.sort(() => Math.random() -0.5);
 
-// boton "NEW GAME"
-function createTable(){
-    reset();
-    bombGenerator(game);
-    var theGame = populateField();
-    
-    var theTable = checkBomb(theGame);
-    console.log(numberCell);
-    console.log(bombCell);
-    console.log(emptyCell);
-    var theField = document.getElementById('field').innerHTML = theTable;
-    for (let i = 0; i < theGame.length; i++){
-    document.getElementsByClassName("innerCell")[i].style.visibility = "hidden";
+
+        for (let i = 0; i < width*width; i++) {
+            const square = document.createElement('div');
+            square.setAttribute('id', i);
+            square.classList.add(shuffledArray[i]);
+            grid.appendChild(square);
+            squares.push(square);
+
+            //normal click
+            square.addEventListener('click', function(e){
+                click(square);
+            })
+
+            //cntrl and left click
+            square.oncontextmenu = function(e) {
+                e.preventDefault();
+                addFlag(square);
+            }
+        }
+
+        //add numbers
+        for (let i = 0; i < squares.length; i++){
+            let total = 0;
+            const isLeftEdge = (i % width === 0);
+            const isRightEdge = (i % width === width -1);
+
+            if (squares[i].classList.contains('valid')) {
+                if (i > 0 && !isLeftEdge && squares[i -1].classList.contains('bomb')) total ++;
+                if (i > 9 && !isRightEdge && squares[i +1 -width].classList.contains('bomb')) total++;
+                if (i > 10 && squares[i - width].classList.contains('bomb')) total++;
+                if (i > 11 && !isLeftEdge && squares[i -1 -width].classList.contains('bomb')) total++;
+                if (i < 98 && !isRightEdge && squares[i +1].classList.contains('bomb')) total++;
+                if (i < 90 && !isLeftEdge && squares[i -1 +width].classList.contains('bomb')) total++;
+                if (i < 88 && !isRightEdge && squares[i +1 +width].classList.contains('bomb')) total++;
+                if (i < 89 && squares[i +width].classList.contains('bomb')) total++;
+                squares[i].setAttribute('data', total);
+                
+                
+             
+            }
+        }
+
+
+
     }
 
-    return theField;
-}
+    createBoard();
 
-
-
-
-//genera las bombas del juego en un array aleatorio
-//comprobando si existe con cada iteracion
-function bombGenerator(game){
-    
-    for (let i = 0; i < set; i++){ 
-        
-        var bomb = Math.floor(Math.random() * game);
-        
-        if (bombSet.includes(bomb)){
-            bomb = Math.floor(Math.random() * game);
-            bombSet.push(bomb);
-            
-        }else
-        bombSet.push(bomb);
-
-    }    
-    return bombSet;
-}
-
-// colocar las bombas en un array con "0" como celda vacia
-
-function populateField() {
-    var mineField = [];
-    for (let i = 0; i < game; i++){
-  
-    if(i == bombSet.find(isBomb => isBomb == i)){        
-        mineField.push(i);        
-    }else   
-        mineField.push("0");
-}
-    return mineField;
-
-}
-
-
-
-//resetea el juego
-function reset(){
-    var clearField = document.getElementById('field').innerHTML = "";
-    bombSet = [];
-    emptyCell = [];
-    numberCell = [];
-    bombCell = [];
-    return clearField;
-
-}
-
-
-//crear el html
-//contruye una string con etiquetas html de tabla.
-
-function checkBomb(arr){
-    var bombCount = 0;
-    var mineTable = "<tr>";
-    var rowBreak = 0;
-    for (let i = 0; i < arr.length; i++){
-        bombCount =0;
-        if (rowBreak == 8){mineTable+="</tr><tr>"; rowBreak=0;}
-        
-        if (arr[i] != "0"){
-            mineTable += `<td onclick="showCell(${i})" class="cell" id=${i}><span class="innerCell">*</span></td>`;
-            bombCell.push(i);
-        }else if (arr[i] =="0"){
-        if(Number.isInteger(arr[i-9]) == true && rowBreak != 0){bombCount++;}
-        if(Number.isInteger(arr[i-8]) == true){bombCount++}
-        if(Number.isInteger(arr[i-7]) == true && rowBreak != 7){bombCount++;}
-        if(Number.isInteger(arr[i-1]) == true && rowBreak != 0){bombCount++;}
-        if(Number.isInteger(arr[i+1]) == true && rowBreak != 7){bombCount++;}
-        if(Number.isInteger(arr[i+7]) == true && rowBreak != 0){bombCount++;}
-        if(Number.isInteger(arr[i+8]) == true ){bombCount++;}
-        if(Number.isInteger(arr[i+9]) == true && rowBreak != 7){bombCount++;}
-        if(bombCount == 0) {
-            mineTable += `<td onclick="showCell(${i})" class="cell" id=${i}><span class="innerCell"></span></td>`;
-            emptyCell.push(i);
+    //add flag
+    function addFlag(square) {
+        if (isGameOver) return;
+        if (!square.classList.contains('checked') && (flags < bombAmount)) {
+            if (!square.classList.contains('flag')) {
+                square.classList.add('flag');
+                square.innerHTML = '🚩';
+                flags++;
+                checkForWin();
+            }else{
+                square.classList.remove('flag');
+                square.innerHtml = '';
+                flaggs--;
+            }
         }
-        else mineTable += `<td onclick="showCell(${i})" class="cell" id=${i}><span class="innerCell">${bombCount}</span></td>`;
-            numberCell.push(i);
-        }
-        
-        rowBreak ++;
-}
-  
-     mineTable += "</tr>";
-    return mineTable;
-}
-
-function showCell(cellId){
-    console.log("clicked" + cellId);
-    console.log(bombSet);
-    checkCells(bombSet, cellId);
-    
-
-}
-
-function checkCells(arr, n){
-  
-    var innerCell = document.getElementsByClassName("innerCell");
-    var cell = document.getElementsByClassName("cell");
-
-    
-    if (arr.includes(n)){
-        console.log(innerCell.length);
-        for (let i = 0; i < cell.length; i++){
-         
-             cell[i].style.visibility = "visible";
-            
-        }
-    }else if (emptyCell.includes(n)){
-        console.log("Empty");
-        
-        for (let j = 0; j < emptyCell.length; j++){
-            innerCell[emptyCell[j]].style.visibility = "visible";
-            cell[emptyCell[j]].style.background = "grey";
-           
-        }
-    }else {
-        innerCell[n].style.visibility = "visible";
     }
- 
-    
-}
+
+    // click on square actions
+    function click(square) {
+        let currentId = square.id;
+        if (isGameOver) return;
+        if (square.classList.contains('checked') || square.classList.contains('flag')) return;
+            if (square.classList.contains('bomb')) {
+            gameOver(square);
+        }else {
+            let total = square.getAttribute('data')
+            if (total !=0) {
+                square.classList.add('checked');
+                square.innerHTML = total;
+                return;
+            }
+            checkSquare(square, currentId);
+        }
+        square.classList.add('checked');
+    }
+
+
+    //check neighboring squaren once clicked
+    function checkSquare(square, currentId) {
+        const isLeftEdge = (currentId % width ===0);
+        const isRightEdge = (currentId % width === width -1);
+
+        setTimeout(() => {
+            if (currentId > 0 && !isLeftEdge) {
+                const newId = squares[parseInt(currentId) - 1].id;
+                const newSquare = document.getElementById(newId);
+                click(newSquare);
+            }
+            if (currentId > 9 && !isRightEdge) {
+                const newId = squares[parseInt(currentId) + 1 -width].id;
+                const newSquare = document.getElementById(newId);
+                click(newSquare);
+            }
+            if (currentId > 10) {
+                const newId = squares[parseInt(currentId - width)].id;
+                const newSquare = document.getElementById(newId);
+                click(newSquare);
+            }
+            if (currentId > 11 && !isLeftEdge) {
+                const newId = squares[parseInt(currentId) -1 -width].id;
+                const newSquare = document.getElementById(newId);
+                click(newSquare);
+            }
+            if (currentId < 98 && !isRightEdge) {
+                const newId = squares[parseInt(currentId) +1].id;
+                const newSquare = document.getElementById(newId);
+                click(newSquare);
+            }
+            if (currentId < 90 && !isLeftEdge) {
+                const newId = squares[parseInt(currentId) -1 +width].id;
+                const newSquare = document.getElementById(newId);
+                click(newSquare);
+            }
+            if (currentId < 88 && !isRightEdge) {
+                const newId = squares[parseInt(currentId) +1 +width].id;
+                const newSquare = document.getElementById(newId);
+                click(newSquare);
+            }
+            if (currentId < 89) {
+                const newId = squares[parseInt(currentId) +width].id;
+                const newSquare = document.getElementById(newId);
+                click(newSquare);
+            }
+
+
+        }, 10);
+
+    }
+
+    //game over
+    function gameOver(square) {
+        console.log("game over");
+        isGameOver = true;
+
+        //show all bombs
+        squares.forEach(square => {
+            if (square.classList.contains('bomb')) {
+                square.innerHTML = '💣';
+            }
+        })
+        
+    }
+
+    //check for win
+    function checkForWin() {
+        let matches = 0;
+        for (let i = 0; i < squares.length; i++) {
+            if (squares[i].classList.contains('flag') && squares[i].classList.contains('bomb')) {
+                matches++;
+            }
+
+            if (matches === bombAmount) {
+                console.log('Win');
+                isGameOver = true;
+            }
+        }
+    }
+
+})

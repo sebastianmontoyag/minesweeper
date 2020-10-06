@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		
+		<meta charset="UTF-8">
 		<link rel="stylesheet" href="styles/style.css">
 		<script src="./scripts/myscript.js"></script>
 	</head>
 	<body>
 		
-		<div id="main">
-			
-			<div id="table-div">
-				<p>Let's play a game!</p>
-				<button id="new_game" onclick="createTable()">New Game</button>
+			<div id="main">
 				
-					<div class="status-bar">
-						<ul>
-							<li>Bombs left:</li>
-							<li><button id="reset" onclick="reset()">:D</button></li>
-							<li>timer</li>
-						</ul>
+				<div id="table-div">
+					<p>Let's play a game!</p>
+					<button id="new_game" onclick="createTable()">New Game</button>
 					
-					</div>
-					<div class="field-div">
-					<table id="field" >
+						<div class="status-bar">
+							<ul>
+								<li>Bombs left:</li>
+								<li><button id="reset" onclick="reset()">:D</button></li>
+								<li>timer</li>
+							</ul>
 						
-					</table>
+						</div>
+						<div class="field-div">
+						<table id="field" >
+							<div class="grid"></div>
+						</table>
+					</div>
+						
 				</div>
-					
 			</div>
-		</div>
+		
 	</body>
 </html>
