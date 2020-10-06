@@ -126,12 +126,13 @@ function checkCells(arr, n){
   
     var innerCell = document.getElementsByClassName("innerCell");
     var cell = document.getElementsByClassName("cell");
+
     
     if (arr.includes(n)){
         console.log(innerCell.length);
-        for (let i = 0; i < innerCell.length; i++){
+        for (let i = 0; i < cell.length; i++){
          
-             innerCell[i].style.visibility = "visible";
+             cell[i].style.visibility = "visible";
             
         }
     }else if (emptyCell.includes(n)){
