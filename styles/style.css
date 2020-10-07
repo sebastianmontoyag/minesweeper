@@ -2,29 +2,19 @@ body {
     background-color:gainsboro;
 }
 
-#main {
-    width: 400px;
+.main {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.game {
     height: 600px;
     margin: 0 auto;
     position: relative;
     background: rgba(94, 94, 94, 0.71);
     border-radius: 5%;
     box-shadow: #272727 4px 4px;
-}
-
-#table-div  {
-    position: relative;
-    margin: 0 auto;
-    text-align: center;
-    padding: 20px 20px 20px 20px;
-}
-
-table {
-    min-width: 80%;
-	border: solid;
-    background-color: silver;
-    margin: auto;
-    empty-cells: show;
 }
 
 
@@ -44,7 +34,8 @@ th {
 .status-bar {
     width: 100%;
     height: auto;
-    padding: 10px 0 10px 0;
+    padding-top: 40px;
+    
 
 }
 
@@ -53,27 +44,16 @@ th {
     list-style-type: none;
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 
-.status-bar li {
-    width: 180px;
-}
 .status-bar button {
-    width: 100%;
+    width: 50px;
 }
 
-/* hacer en javascript: hide all cells */
-
-
-
-td:hover {
-    
-    background: #a7a5a4;
-    
-}
 
 .field-div {
-    padding-top: 40px;
+    padding: 40px;
 }
 
 
@@ -89,11 +69,15 @@ td:hover {
 .grid div {
     height: 40px;
     width: 40px;
+    box-shadow:0px 0px 0px 1px black inset;
+    border-radius: 5%;
 }
+
 
 .checked {
     background-color: red;
 }
+
 
 .bomb {
     background-color: orange;

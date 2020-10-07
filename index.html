@@ -7,28 +7,21 @@
 	</head>
 	<body>
 		
-			<div id="main">
+			<div class="main">	
+				<div class="game">
+				<div class="status-bar">
+					<ul>
+						<li>Bombs left:</li>
+						<li><button id="reset">:D</button></li>
+						<li>timer</li>
+					</ul>
 				
-				<div id="table-div">
-					<p>Let's play a game!</p>
-					<button id="new_game" onclick="createTable()">New Game</button>
-					
-						<div class="status-bar">
-							<ul>
-								<li>Bombs left:</li>
-								<li><button id="reset" onclick="reset()">:D</button></li>
-								<li>timer</li>
-							</ul>
-						
-						</div>
-						<div class="field-div">
-						<table id="field" >
-							<div class="grid"></div>
-						</table>
-					</div>
-						
+				</div>
+				<div class="field-div">
+					<div class="grid"></div>
 				</div>
 			</div>
-		
+			</div>
+
 	</body>
 </html>
