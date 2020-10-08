@@ -4,9 +4,9 @@ In this project I want to test my newly aquired knowlege in HTML/CSS and JS, so 
 
 toDo:
 
-implement my logic
+implement my logic OK
 style menu bar
 add timer
-add bombs left
+add bombs left OK 
 
     
