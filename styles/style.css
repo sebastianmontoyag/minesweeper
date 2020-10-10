@@ -1,5 +1,11 @@
+* { 
+    margin: 0; 
+    padding: 0;
+}
 body {
+    padding-top: 5vh;
     background-color:gainsboro;
+    font-size: 16px;
 }
 
 .main {
@@ -9,27 +15,14 @@ body {
 }
 
 .game {
-    height: 600px;
-    margin: 0 auto;
-    position: relative;
+    height: 90vh;
     background: rgba(94, 94, 94, 0.71);
     border-radius: 5%;
     box-shadow: #272727 4px 4px;
+    font-size: 1.4rem;
 }
 
 
-th {
-    background-color: Grey;
-    
-}
-
-
-.cell {
-    border: 5px solid;
-    border-color: #a7a5a4;
-    width: 20px;
-    height: 20px;
-}
 
 .status-bar {
     width: 100%;
@@ -40,16 +33,14 @@ th {
 }
 
 .status-bar ul{
-    width: 80%;
     list-style-type: none;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    align-items: center;
+    justify-content: space-around;
 }
 
-.status-bar button {
-    width: 50px;
-}
+
 
 #reset {
     width: 40px;
@@ -77,11 +68,43 @@ th {
     width: 40px;
     box-shadow:0px 0px 0px 1px black inset;
     border-radius: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 
 .checked {
     background-color: rgba(202, 202, 202, 0.993);
+}
+
+
+
+/* phone */
+@media screen and (max-width: 600px) {
+
+
+    #reset {
+        height: 30px;
+        width: 30px;
+    }
+
+    .game {
+        height: 60vh;
+        font-size: 1rem;
+    }
+
+
+    .grid {
+        width: 250px;
+        height: 250px;
+    }
+
+    .grid div {
+        width: 25px;
+        height: 25px;
+    }
 }
 
 
