@@ -51,6 +51,11 @@ th {
     width: 50px;
 }
 
+#reset {
+    width: 10px;
+    height: 10px;
+    border-radius: 10%;
+}
 
 .field-div {
     padding: 40px;
@@ -75,7 +80,7 @@ th {
 
 
 .checked {
-    background-color: red;
+    background-color: rgba(202, 202, 202, 0.993);
 }
 
 
