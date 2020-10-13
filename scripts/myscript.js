@@ -1,17 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     const reset = document.getElementById('reset');
+    const dificulty = document.getElementById('dificulty-set');
     const bombs = document.getElementById('bombsLeft');
     let width = 10;
-    let bombAmount = 10;
+    let bombAmount = 20;
     let flags = 0;
     let squares = [];
     let isGameOver = false;
     let bombsArray = [];
     let numArray = [];
-
+    //erase board 
+    function eraseBoard() {
+        grid.innerHTML = "";
+         
+    }
     //create board
-    function createBoard() {
+    function createBoard(dificulty = 20) {
+        bombAmount = dificulty;
         //create game with random bombs
         bombsArray = generateBombs(width*width);
         bombs.innerHTML = bombAmount - flags;
@@ -184,8 +190,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //reset game
+    function resetGame(dificulty) {
+        console.log(dificulty);
+        eraseBoard();
+        isGameOver = false;
+        reset.innerHTML = '😐';
+        reset.style.background = "lightgrey";
+        createBoard(dificulty);
+    }
     reset.onclick = function() {
-        window.location.reload(); 
+        // window.location.reload(); 
+        resetGame(bombAmount);
+    }
+
+    //set dificulty 
+    dificulty.onclick = function() {
+        var selection = document.getElementById('dificulty');
+        var opt = selection.options[selection.selectedIndex];
+        bombAmount = opt.value;
+        resetGame(bombAmount);
     }
 
     //geneate the bombs

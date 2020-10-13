@@ -79,6 +79,20 @@ body {
     background-color: rgba(202, 202, 202, 0.993);
 }
 
+.dificulty-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.dificulty-div button {
+    padding: 5px;
+}
+
+.dificulty-div select {
+    padding: 5px;
+}
 
 
 /* phone */
@@ -91,19 +105,19 @@ body {
     }
 
     .game {
-        height: 60vh;
+        height: 70vh;
         font-size: 1rem;
     }
 
 
     .grid {
-        width: 250px;
-        height: 250px;
+        width: 270px;
+        height: 270px;
     }
 
     .grid div {
-        width: 25px;
-        height: 25px;
+        width: 27px;
+        height: 27px;
     }
 }
 
