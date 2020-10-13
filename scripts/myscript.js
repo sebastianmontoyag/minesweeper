@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             //normal click
             square.addEventListener('click', function(e){
                 click(square);
+                checkForWin(); 
             })
 
             //cntrl and left click
@@ -72,8 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!square.classList.contains('flag')) {
                 square.classList.add('flag');
                 square.innerHTML = '🚩';
-                flags++;
-                checkForWin();                
+                flags++;               
             }else{
                 square.classList.remove('flag');
                 square.innerHTML = '';
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < squares.length; i++) {
             if (squares[i].classList.contains('flag') && bombsArray.includes(parseInt(i))) {
                 matches++;
-            }
+           
 
             if (matches === bombAmount) {
                 isGameOver = true;
@@ -188,11 +188,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+}
 
     //reset game
     function resetGame(dificulty) {
-        console.log(dificulty);
+
         eraseBoard();
+        flags = 0;
         isGameOver = false;
         reset.innerHTML = '😐';
         reset.style.background = "lightgrey";
