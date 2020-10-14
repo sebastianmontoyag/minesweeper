@@ -87,18 +87,18 @@ body {
     background-color: rgba(202, 202, 202, 0.993);
 }
 
-.dificulty-div {
+.difficulty-div {
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
 
-.dificulty-div button {
+.difficulty-div button {
     padding: 5px;
 }
 
-.dificulty-div select {
+.difficulty-div select {
     padding: 5px;
 }
 
