@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     const reset = document.getElementById('reset');
-    const dificulty = document.getElementById('dificulty-set');
+    const difficulty = document.getElementById('difficulty-set');
     const bombs = document.getElementById('bombsLeft');
     let width = 10;
     let bombAmount = 20;
@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
          
     }
     //create board
-    function createBoard(dificulty = 20) {
-        bombAmount = dificulty;
+    function createBoard(difficulty = 20) {
+        bombAmount = difficulty;
         //create game with random bombs
         bombsArray = generateBombs(width*width);
         bombs.innerHTML = bombAmount - flags;
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //reset game
-    function resetGame(dificulty) {
+    function resetGame(difficulty) {
 
         eraseBoard();
         flags = 0;
@@ -209,16 +209,16 @@ document.addEventListener('DOMContentLoaded', () => {
         squares = [];
         reset.innerHTML = '😐';
         reset.style.background = "lightgrey";
-        createBoard(dificulty);
+        createBoard(difficulty);
     }
     reset.onclick = function() {
         // window.location.reload(); 
         resetGame(bombAmount);
     }
 
-    //set dificulty 
-    dificulty.onclick = function() {
-        var selection = document.getElementById('dificulty');
+    //set difficulty 
+    difficulty.onclick = function() {
+        var selection = document.getElementById('difficulty');
         var opt = selection.options[selection.selectedIndex];
         bombAmount = parseInt(opt.value);
         resetGame(bombAmount);
