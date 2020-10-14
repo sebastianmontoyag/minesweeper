@@ -40,7 +40,15 @@ body {
     justify-content: space-around;
 }
 
-
+.bombcount {
+    border: solid grey;
+    background: black;
+    font-size: 2rem;
+    color: red;
+    padding-left: 20px;
+    padding-right: 5px;
+    
+}
 
 #reset {
     width: 40px;

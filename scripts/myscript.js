@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let isGameOver = false;
     let bombsArray = [];
     let numArray = [];
+
+    
     //erase board 
     function eraseBoard() {
         grid.innerHTML = "";
@@ -30,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
             //normal click
             square.addEventListener('click', function(e){
                 click(square);
-                checkForWin(); 
             })
 
             //cntrl and left click
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 addFlag(square);
             }
+            
         }
 
 
@@ -73,7 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!square.classList.contains('flag')) {
                 square.classList.add('flag');
                 square.innerHTML = '🚩';
-                flags++;               
+                flags++;
+                //checkForWin();      
             }else{
                 square.classList.remove('flag');
                 square.innerHTML = '';
@@ -81,6 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             bombs.innerHTML = bombAmount - flags;
+                
+            
         }
     }
 
@@ -97,9 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (total !=0) {
                 square.classList.add('checked');
                 square.innerHTML = total;
+                checkForWin();
                 return;
             }
             checkSquare(square, currentId);
+                  
         }
         square.classList.add('checked');
     }
@@ -155,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         }, 10);
-
     }
 
     //game over
@@ -175,20 +181,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //check for win
     function checkForWin() {
-        let matches = 0;
+        // let matches = 0;
+        let unchecked = 0;
         for (let i = 0; i < squares.length; i++) {
-            if (squares[i].classList.contains('flag') && bombsArray.includes(parseInt(i))) {
-                matches++;
-           
-
-            if (matches === bombAmount) {
-                isGameOver = true;
+            // if (squares[i].classList.contains('flag') && bombsArray.includes(parseInt(i))) {
+            //     matches++;
+            // }
+            if (squares[i].classList.contains('checked')) {
+                unchecked++;
+            }
+            // matches === bombAmount || 
+            if (unchecked === (squares.length - bombAmount)) {
+                gameOver();
                 reset.innerHTML = '😃';
                 reset.style.background = "green";
             }
         }
     }
-}
+
 
     //reset game
     function resetGame(dificulty) {
@@ -196,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         eraseBoard();
         flags = 0;
         isGameOver = false;
+        squares = [];
         reset.innerHTML = '😐';
         reset.style.background = "lightgrey";
         createBoard(dificulty);
@@ -209,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dificulty.onclick = function() {
         var selection = document.getElementById('dificulty');
         var opt = selection.options[selection.selectedIndex];
-        bombAmount = opt.value;
+        bombAmount = parseInt(opt.value);
         resetGame(bombAmount);
     }
 
